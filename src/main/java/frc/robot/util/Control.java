@@ -1,10 +1,13 @@
 package frc.robot.util;
 
+import frc.robot.commands.Control.ArmMotorControl;
 // import frc.robot.commands.Assistance.Balance;
 // import frc.robot.commands.Assistance.Stop;
 import frc.robot.commands.Control.ArmPistonControl;
 import frc.robot.commands.Control.ClawControl;
+import frc.robot.commands.Control.Safety;
 import frc.robot.subsystems.Drivetrain;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -26,12 +29,18 @@ public class Control {
 	public static void configureBindings() {
         // rightJoystick.trigger().toggleOnTrue(new Balance());
         // rightJoystick.button(2).toggleOnTrue(new Stop());
+        //What's ufjilkhjmvbc
 
-        xboxController.a().toggleOnTrue(new ClawControl(true));
-        xboxController.a().toggleOnFalse(new ClawControl(false));
+        xboxController.leftBumper().and(xboxController.rightBumper()).toggleOnTrue(new Safety());
 
-        xboxController.b().toggleOnTrue(new ArmPistonControl(true));
-        xboxController.b().toggleOnFalse(new ArmPistonControl(false));
+       
+        if(SmartDashboard.getBoolean("safety", false)){
+            xboxController.a().toggleOnTrue(new ClawControl(true));
+            xboxController.a().toggleOnFalse(new ClawControl(false));
+
+            xboxController.b().toggleOnTrue(new ArmPistonControl(true));
+            xboxController.b().toggleOnFalse(new ArmPistonControl(false));
+        }
     }
 
     public static double getLeftJoystickY() {
@@ -48,6 +57,9 @@ public class Control {
     }
 
     public static double leftControllerJoystickY() {
-        return xboxController.getLeftY();
+        return (0.8 * xboxController.getLeftY());
     }
+
+
+
 }

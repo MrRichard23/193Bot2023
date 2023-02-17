@@ -43,8 +43,8 @@ public class Drivetrain extends SubsystemBase{
         followLeftTalon = new CANSparkMax(Constants.FOLLOW_LEFT_TALON_PORT, MotorType.kBrushless);
         followRightTalon = new CANSparkMax(Constants.FOLLOW_RIGHT_TALON_PORT, MotorType.kBrushless);
 
-        followLeftTalon.follow(masterLeftTalon);
-        followRightTalon.follow(masterRightTalon);
+        // followLeftTalon.follow(masterLeftTalon);
+        // followRightTalon.follow(masterRightTalon);
 
         // ahrs = new AHRS(SerialPort.Port.kMXP);
 
@@ -116,10 +116,12 @@ public class Drivetrain extends SubsystemBase{
 
     public void setLeftDrive(double speed) {
         masterLeftTalon.set(speed * Control.getLeftThrottle());
+        followLeftTalon.set(speed * Control.getLeftThrottle());
     }
     
     public void setRightDrive(double speed) {
         masterRightTalon.set(speed * Control.getLeftThrottle());
+        followRightTalon.set(speed * Control.getLeftThrottle());
     }
     
     public void setAllDrive(double speed) {

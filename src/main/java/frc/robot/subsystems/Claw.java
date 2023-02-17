@@ -60,3 +60,4 @@ public class Claw extends SubsystemBase{
 //         return piston.get();
 //     }
 // }
+// use if we need single solenoid!! don't delete ⊙.☉

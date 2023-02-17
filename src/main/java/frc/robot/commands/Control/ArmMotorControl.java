@@ -14,6 +14,8 @@ public class ArmMotorControl extends CommandBase{
     }
 
     public void execute() {
-        armMotor.setArmMotor(Control.leftControllerJoystickY());
-    }
+            armMotor.setArmMotor(Control.leftControllerJoystickY());
+            // TODO: print to see angle values
+    
+}
 }
